@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "nio-file",
+    name: "swift-study",
     products: [
         // .executable(name: "nio-file", targets: ["nio-file"]),        
         .executable(name: "pop", targets: ["pop"]),        
