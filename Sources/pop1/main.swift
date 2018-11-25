@@ -46,27 +46,28 @@ let c1 = Number(1)
 let c2 = Number(2)
 let c3 = Number(3)
 
-print("Number:", binarySearch(sortedKeys: [1,2,3], forKey: 3))
+print("r1:", binarySearch(sortedKeys: [1,2,3], forKey: 3))
 
 
-// extension Collection where Element : Ordered, Index == Int {
+// 链式调用
+
+extension Collection where Element : Ordered, Index == Int {
     
-//     func binarySearch(forKey k: Element) -> Int {
-//         var lo = 0
-//         var hi = self.count
-//         while (hi > lo) {
-//             let mid = lo + (hi - lo) / 2
-//             if self[mid].precedes(k) {
-//                 lo = mid + 1
-//             }
-//             else {
-//                 hi = mid
-//             }
-//         }
-//         return lo
-//     }
-// }
+    func binarySearch(forKey k: Element) -> Int {
+        var lo = 0
+        var hi = self.count
+        while (hi > lo) {
+            let mid = lo + (hi - lo) / 2
+            if self[mid].precedes(k) {
+                lo = mid + 1
+            }
+            else {
+                hi = mid
+            }
+        }
+        return lo
+    }
+}
 
-// let r4 = [c1,c2,c3].binarySearch(forKey: c2)
-// print("r4:", r4)
+print("r2:", [c1,c2,c3].binarySearch(forKey: c3))
 
