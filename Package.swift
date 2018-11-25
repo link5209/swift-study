@@ -7,7 +7,8 @@ let package = Package(
     name: "swift-study",
     products: [
         // .executable(name: "nio-file", targets: ["nio-file"]),        
-        .executable(name: "pop", targets: ["pop"]),        
+        .executable(name: "pop", targets: ["pop"]),
+        .executable(name: "pop1", targets: ["pop1"]),
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-nio.git", from: "1.8.0"),
@@ -20,6 +21,9 @@ let package = Package(
         //     dependencies: ["NIO", "NIOHTTP1"]),
         .target(
             name: "pop",
+            dependencies: []),
+        .target(
+            name: "pop1",
             dependencies: []),
     ]
 )
