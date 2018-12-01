@@ -1,22 +1,21 @@
-// Comparable 实现
+     // struct Countdown: Sequence, IteratorProtocol {
+     //     var count: Int
 
-func binarySearch<T: Comparable>(sortedKeys: [T], forKey k: T) -> Int {
-    var lo = 0
-    var hi = sortedKeys.count
-    while (hi > lo) {
-        let mid = lo + (hi - lo) / 2
-        if sortedKeys[mid] < k {
-            lo = mid + 1
-        }
-        else {
-            hi = mid
-        }
-    }
-    return lo
-}
+     //     mutating func next() -> Int? {
+     //         if count == 0 {
+     //             return nil
+     //         } else {
+     //             defer { count -= 1 }
+     //             return count
+     //         }
+     //     }
+     // }
 
-// let arr = [3.0, 4.1, 5.0]
-print("r0:", binarySearch(sortedKeys: [2.1,3.4, 4.0], forKey: 4.0))
+     // let threeToGo = Countdown(count: 3)
+     // for i in threeToGo {
+     //     print(i)
+     // }
+
 
 
 extension Collection where Element : Comparable, Index == Int {
@@ -38,30 +37,6 @@ extension Collection where Element : Comparable, Index == Int {
 }
 
 print("r1:", [2.1,3.4, 4.0].binarySearch(forKey: 4.0))
-
-
-// 实现 comparable
-class Number: Comparable {
-    var value: Double = 0
-
-    init(_ value: Double) {
-        self.value = value
-    }
-
-    static func < (lhs: Number, rhs: Number) -> Bool {
-        return lhs.value < rhs.value
-    }
-
-    static func == (lhs: Number, rhs: Number) -> Bool {
-        return lhs.value == rhs.value
-    }
-}
-
-let c1 = Number(1)
-let c2 = Number(2)
-let c3 = Number(3)
-
-print("r2:", [c1,c2,c3].binarySearch(forKey: c1))
 
 
 
