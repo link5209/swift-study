@@ -49,16 +49,16 @@ let c3 = Number(3)
 print("r1:", binarySearch(sortedKeys: [1,2,3], forKey: 3))
 
 
-// 链式调用
 
+// 链式调用
 extension Collection where Element : Ordered, Index == Int {
     
-    func binarySearch(forKey k: Element) -> Int {
+    func binarySearch(forKey: Element) -> Int {
         var lo = 0
         var hi = self.count
         while (hi > lo) {
             let mid = lo + (hi - lo) / 2
-            if self[mid].precedes(k) {
+            if self[mid].precedes(forKey) {
                 lo = mid + 1
             }
             else {
@@ -70,4 +70,13 @@ extension Collection where Element : Ordered, Index == Int {
 }
 
 print("r2:", [c1,c2,c3].binarySearch(forKey: c3))
+
+
+
+
+
+
+
+
+
 
