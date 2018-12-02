@@ -35,3 +35,59 @@ for node in linkedList {
 print(linkedList.map {$0 + "!"})
 print(linkedList.filter {$0 < "C"})
 print(linkedList.sorted(by: >))
+
+
+
+// quickSort
+extension Array {
+    var decompose: (head: Element, tail: [Element])? {
+        return count > 0 ? (self[0], Array(self[1..<count])) : nil
+    }
+}
+
+func quickSort(input: [Int]) -> [Int] {
+    if let (pivot, rest) = input.decompose {
+        let lesser = rest.filter {$0 < pivot}
+        let greater = rest.filter {$0 >= pivot}
+        return quickSort(input: lesser) + [pivot] + quickSort(input: greater)
+    }
+    else {
+        return []
+    }
+}
+
+print(quickSort(input: [5,78,35,24,26,2,6,7,5,2,7,4]))
+
+// generic
+
+func quickSortX<T: Comparable>(input: [T]) -> [T] {
+    if let (pivot, rest) = input.decompose {
+        let lesser = rest.filter {$0 < pivot}
+        let greater = rest.filter {$0 >= pivot}
+        return quickSortX(input: lesser) + [pivot] + quickSortX(input: greater)
+    }
+    else {
+        return []
+    }
+}
+
+print(quickSortX(input: ["d","w","r","a","t","t","a","y","a","e","x"]))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
