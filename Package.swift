@@ -10,6 +10,7 @@ let package = Package(
         .executable(name: "pop", targets: ["pop"]),
         .executable(name: "pop1", targets: ["pop1"]),
         .executable(name: "pop2", targets: ["pop2"]),
+        .executable(name: "pop3", targets: ["pop3"]),
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-nio.git", from: "1.8.0"),
@@ -28,6 +29,9 @@ let package = Package(
             dependencies: []),
         .target(
             name: "pop2",
+            dependencies: []),
+        .target(
+            name: "pop3",
             dependencies: []),
     ]
 )
