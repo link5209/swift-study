@@ -18,13 +18,13 @@ print(binarySearch(sortedKeys: [1,2,3], forKey: 3))
 
 
 
-// Generic&Comparable 实现
-func binarySearch<T: Comparable>(sortedKeys: [T], forKey k: T) -> Int {
+// 使用Generic支持不同类型的输入参数
+func binarySearch<T: Comparable>(sortedKeys: [T], forKey: T) -> Int {
     var lo = 0
     var hi = sortedKeys.count
-    while (hi > lo) {
+    while hi > lo {
         let mid = lo + (hi - lo) / 2
-        if sortedKeys[mid] < k {
+        if sortedKeys[mid] < forKey {
             lo = mid + 1
         }
         else {
@@ -39,7 +39,7 @@ print(binarySearch(sortedKeys: [1,2,3], forKey: 3))
 
 
 
-// class 实现 comparable
+// 自定义类型作为输入参数 & 实现Comparable
 class Number: Comparable {
     var value: Double = 0
 
@@ -64,8 +64,7 @@ print(binarySearch(sortedKeys: [c1,c2,c3], forKey: c3))
 
 
 
-
-// 使用 protocol，以此兼容各种实现了该protocol的对象都可以使用该函数，提高复用层次
+// 使用自定义 protocol代替Comparable
 
 protocol Ordered {
     func precedes(_ other: Ordered) -> Bool
@@ -94,12 +93,6 @@ extension Int: Ordered {
 
 print(binarySearchX(sortedKeys: [1,2,3], forKey: 3))
 
-
-extension Double: Ordered {
-    func precedes(_ other: Ordered) -> Bool {
-        return self < (other as! Double).self
-    }
-}
 
 extension Number: Ordered {
     func precedes(_ other: Ordered) -> Bool {
