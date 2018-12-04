@@ -174,6 +174,139 @@ print(addresses.contains(home))
 // }
 
 
+// https://github.com/apple/swift/blob/master/stdlib/public/core/SequenceAlgorithms.swift
+
+// extension Sequence where Element : Equatable {
+//   /// Returns a Boolean value indicating whether the sequence contains the
+//   /// given element.
+//   ///
+//   /// This example checks to see whether a favorite actor is in an array
+//   /// storing a movie's cast.
+//   ///
+//   ///     let cast = ["Vivien", "Marlon", "Kim", "Karl"]
+//   ///     print(cast.contains("Marlon"))
+//   ///     // Prints "true"
+//   ///     print(cast.contains("James"))
+//   ///     // Prints "false"
+//   ///
+//   /// - Parameter element: The element to find in the sequence.
+//   /// - Returns: `true` if the element was found in the sequence; otherwise,
+//   ///   `false`.
+//   ///
+//   /// - Complexity: O(*n*), where *n* is the length of the sequence.
+//   @inlinable
+//   public func contains(_ element: Element) -> Bool {
+//     if let result = _customContainsEquatableElement(element) {
+//       return result
+//     } else {
+//       return self.contains { $0 == element }
+//     }
+//   }
+// }
+
+
+// extension Sequence {
+//   ///
+//   /// - Complexity: O(*n*), where *n* is the length of the sequence.
+//   @inlinable
+//   public func contains(
+//     where predicate: (Element) throws -> Bool
+//   ) rethrows -> Bool {
+//     for e in self {
+//       if try predicate(e) {
+//         return true
+//       }
+//     }
+//     return false
+//   }
+
+// }
+
+
+// Element 是个什么鬼？see below 👇
+
+
+// public struct Array<Element> {
+
+//     ///      var nums = [10, 20, 30, 40, 50]
+//     ///      nums.replaceSubrange(1...3, with: repeatElement(1, count: 5))
+//     ///      print(nums)
+//     ///      // Prints "[10, 1, 1, 1, 1, 1, 50]"
+//     public mutating func replaceSubrange<C>(_ subrange: Range<Int>, with newElements: C)
+//     where Element == C.Element, C : Collection {
+//         let start = subrange.startIndex
+//         let end = subrange.endIndex
+
+//         arr1 + newElements + arr2
+//     }
+// }
+
+
+// quickSort
+extension Array {
+    var decompose: (head: Element, tail: [Element])? {
+        return count > 0 ? (self[0], Array(self[1..<count])) : nil
+    }
+}
+
+func quickSort(input: [Int]) -> [Int] {
+    if let (pivot, rest) = input.decompose {
+        let lesser = rest.filter {$0 < pivot}
+        let greater = rest.filter {$0 >= pivot}
+        return quickSort(input: lesser) + [pivot] + quickSort(input: greater)
+    }
+    else {
+        return []
+    }
+}
+
+print(quickSort(input: [5,78,35,24,26,2,6,7,5,2,7,4]))
+
+
+// self[1..<count] 使用了下面的方法👇
+// extension Array : RandomAccessCollection, MutableCollection {
+//     public subscript(bounds: Range<Int>) -> ArraySlice<Element> {
+
+//     }
+// }
+
+
+// https://github.com/apple/swift/blob/master/stdlib/public/core/Range.swift
+// public struct Range<Bound: Comparable> {
+//     public let lowerBound: Bound
+//     public let upperBound: Bound
+
+//     public init(uncheckedBounds bounds: (lower: Bound, upper: Bound)) {
+//         self.lowerBound = bounds.lower
+//         self.upperBound = bounds.upper
+//     }
+
+//     @inlinable
+//     public var isEmpty: Bool {
+//         return lowerBound == upperBound
+//     }
+// }
+
+
+
+/// A slice of an `Array`, `ContiguousArray`, or `ArraySlice` instance.
+///
+/// The `ArraySlice` type makes it fast and efficient for you to perform
+/// operations on sections of a larger array. Instead of copying over the
+/// elements of a slice to new storage, an `ArraySlice` instance presents a
+/// view onto the storage of a larger array. And because `ArraySlice`
+/// presents the same interface as `Array`, you can generally perform the
+/// same operations on a slice as you could on the original array.
+///
+/// For more information about using arrays, see `Array` and `ContiguousArray`,
+/// with which `ArraySlice` shares most properties and methods.
+///
+/// Slices Are Views onto Arrays
+public struct ArraySlice<Element> {
+
+}
+
+
 
 
 // 链式调用
