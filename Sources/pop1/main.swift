@@ -190,6 +190,7 @@ print(addresses.contains(home))
 // }
 
 
+
 // quickSort
 extension Array {
     var decompose: (head: Element, tail: [Element])? {
@@ -215,23 +216,6 @@ print(quickSort(input: [5,78,35,24,26,2,6,7,5,2,7,4]))
 // extension Array : RandomAccessCollection, MutableCollection {
 //     public subscript(bounds: Range<Int>) -> ArraySlice<Element> {
 
-//     }
-// }
-
-
-// https://github.com/apple/swift/blob/master/stdlib/public/core/Range.swift
-// public struct Range<Bound: Comparable> {
-//     public let lowerBound: Bound
-//     public let upperBound: Bound
-
-//     public init(uncheckedBounds bounds: (lower: Bound, upper: Bound)) {
-//         self.lowerBound = bounds.lower
-//         self.upperBound = bounds.upper
-//     }
-
-//     @inlinable
-//     public var isEmpty: Bool {
-//         return lowerBound == upperBound
 //     }
 // }
 
