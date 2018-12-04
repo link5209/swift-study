@@ -264,11 +264,11 @@ print(quickSort(input: [5,78,35,24,26,2,6,7,5,2,7,4]))
 
 
 // self[1..<count] 使用了下面的方法👇
-extension Array : RandomAccessCollection, MutableCollection {
-    public subscript(bounds: Range<Int>) -> ArraySlice<Element> {
+// extension Array : RandomAccessCollection, MutableCollection {
+//     public subscript(bounds: Range<Int>) -> ArraySlice<Element> {
 
-    }
-}
+//     }
+// }
 
 
 // https://github.com/apple/swift/blob/master/stdlib/public/core/Range.swift
