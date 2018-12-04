@@ -67,11 +67,11 @@ print(binarySearch(sortedKeys: [c1,c2,c3], forKey: c3))
 /// elements conform to `Comparable`, you can call the `sort()` method without
 /// using arguments to sort the elements of your array in ascending order.
 
-// var nl = [c3,c1,c2]
-// nl.sort()
-// for i in nl {
-//     print(i.value)
-// }
+var nl = [c3,c1,c2]
+nl.sort()
+for i in nl {
+    print(i.value)
+}
 
 
 

@@ -51,6 +51,7 @@ print(binarySearch(sortedKeys: [1,2,3], forKey: 3))
 
 
 // Ordered使用了Self,其实就是 associated type，与Comparable一个道理
+
 // public protocol Comparable : Equatable {
 
 //     /// Returns a Boolean value indicating whether the value of the first
@@ -68,6 +69,7 @@ print(binarySearch(sortedKeys: [1,2,3], forKey: 3))
 
 
 // https://github.com/apple/swift/blob/master/stdlib/public/core/Comparable.swift
+
 // extension Comparable {
 //   /// Returns a Boolean value indicating whether the value of the first argument
 //   /// is greater than that of the second argument.
@@ -78,13 +80,15 @@ print(binarySearch(sortedKeys: [1,2,3], forKey: 3))
 //   /// - Parameters:
 //   ///   - lhs: A value to compare.
 //   ///   - rhs: Another value to compare.
+
+        // 这里揭示了为什么自定义类型需要自己实现 public static func < (lhs: Self, rhs: Self) -> Bool
+        // 逻辑学，所有的Comparable函数实现都通过 < 函数定义推导
+        // extension 提供所有遵守了Comparable的类型的默认实现
 //   @inlinable
 //   public static func > (lhs: Self, rhs: Self) -> Bool {
-//     return rhs < lhs // 这里揭示了为什么自定义类型需要自己实现 public static func < (lhs: Self, rhs: Self) -> Bool
+//     return rhs < lhs
 //   }
 // }
-
-// extension Comparable 的默认实现让swift的内置value type 共享一份实现逻辑
 
 
 /// You can use special versions of some sequence and collection operations
@@ -99,6 +103,7 @@ print(binarySearch(sortedKeys: [1,2,3], forKey: 3))
 
 
 // protocol 的多继承, pop
+// 使得protocols更加小巧，紧凑
 // public protocol Comparable : Equatable {}
 
 // https://github.com/apple/swift/blob/master/stdlib/public/core/Equatable.swift
@@ -115,18 +120,8 @@ print(binarySearch(sortedKeys: [1,2,3], forKey: 3))
 //   static func == (lhs: Self, rhs: Self) -> Bool
 // }
 
+
 // extension Equatable {
-//   /// Returns a Boolean value indicating whether two values are not equal.
-//   ///
-//   /// Inequality is the inverse of equality. For any values `a` and `b`, `a != b`
-//   /// implies that `a == b` is `false`.
-//   ///
-//   /// This is the default implementation of the not-equal-to operator (`!=`)
-//   /// for any type that conforms to `Equatable`.
-//   ///
-//   /// - Parameters:
-//   ///   - lhs: A value to compare.
-//   ///   - rhs: Another value to compare.
 //   // transparent because sometimes types that use this generate compile-time
 //   // warnings, e.g. that an expression always evaluates to true
 //   @_transparent
@@ -135,6 +130,8 @@ print(binarySearch(sortedKeys: [1,2,3], forKey: 3))
 //   }
 // }
 
+
+// Equatable的实现和应用
 class StreetAddress {
     let number: String
     let street: String
@@ -154,9 +151,7 @@ extension StreetAddress: Equatable {
             lhs.unit == rhs.unit
     }
 }
-// The `StreetAddress` type now conforms to `Equatable`. You can use `==` to
-// check for equality between any two instances or call the
-// `Equatable`-constrained `contains(_:)` method.
+
 let addresses = [StreetAddress("1490", "Grove Street"),
                  StreetAddress("2119", "Maple Avenue"),
                  StreetAddress("1400", "16th Street")]
@@ -167,7 +162,7 @@ print(addresses.contains(home))
 // Prints "true"
 
 
-// constraint protocol （addresses.contains(home)）
+// extension constrained by protocol （addresses.contains(home)）
 
 // extension Array where Element : Equatable {
 //     public func contains(_ element: Element) -> Bool
@@ -177,23 +172,6 @@ print(addresses.contains(home))
 // https://github.com/apple/swift/blob/master/stdlib/public/core/SequenceAlgorithms.swift
 
 // extension Sequence where Element : Equatable {
-//   /// Returns a Boolean value indicating whether the sequence contains the
-//   /// given element.
-//   ///
-//   /// This example checks to see whether a favorite actor is in an array
-//   /// storing a movie's cast.
-//   ///
-//   ///     let cast = ["Vivien", "Marlon", "Kim", "Karl"]
-//   ///     print(cast.contains("Marlon"))
-//   ///     // Prints "true"
-//   ///     print(cast.contains("James"))
-//   ///     // Prints "false"
-//   ///
-//   /// - Parameter element: The element to find in the sequence.
-//   /// - Returns: `true` if the element was found in the sequence; otherwise,
-//   ///   `false`.
-//   ///
-//   /// - Complexity: O(*n*), where *n* is the length of the sequence.
 //   @inlinable
 //   public func contains(_ element: Element) -> Bool {
 //     if let result = _customContainsEquatableElement(element) {
@@ -205,40 +183,10 @@ print(addresses.contains(home))
 // }
 
 
-// extension Sequence {
-//   ///
-//   /// - Complexity: O(*n*), where *n* is the length of the sequence.
-//   @inlinable
-//   public func contains(
-//     where predicate: (Element) throws -> Bool
-//   ) rethrows -> Bool {
-//     for e in self {
-//       if try predicate(e) {
-//         return true
-//       }
-//     }
-//     return false
-//   }
-
-// }
-
-
 // Element 是个什么鬼？see below 👇
-
 
 // public struct Array<Element> {
 
-//     ///      var nums = [10, 20, 30, 40, 50]
-//     ///      nums.replaceSubrange(1...3, with: repeatElement(1, count: 5))
-//     ///      print(nums)
-//     ///      // Prints "[10, 1, 1, 1, 1, 1, 50]"
-//     public mutating func replaceSubrange<C>(_ subrange: Range<Int>, with newElements: C)
-//     where Element == C.Element, C : Collection {
-//         let start = subrange.startIndex
-//         let end = subrange.endIndex
-
-//         arr1 + newElements + arr2
-//     }
 // }
 
 
