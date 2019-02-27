@@ -1,4 +1,5 @@
 
+// type script的升级版
 func binarySearch(sortedKeys: [Int], forKey: Int) -> Int {
     var lo = 0
     var hi = sortedKeys.count
@@ -16,6 +17,31 @@ func binarySearch(sortedKeys: [Int], forKey: Int) -> Int {
 
 print(binarySearch(sortedKeys: [1,2,3], forKey: 3))
 
+
+//
+
+func binarySearchY(sortedKeys: [Int], forKey: Int) -> Int? {
+    var lo = 0
+    var hi = sortedKeys.count
+    while hi > lo {
+        let mid = lo + (hi - lo) / 2
+        if sortedKeys[mid] < forKey {
+            lo = mid + 1
+        }
+        else {
+            hi = mid
+        }
+    }
+    return lo >= sortedKeys.count ? nil : lo
+}
+
+let ss = binarySearchY(sortedKeys: [1,2,3,31], forKey: 31)
+if let res = ss {
+    print(res)
+}
+else {
+    print("not found")
+}
 
 
 // 使用Generic支持不同类型的输入参数
