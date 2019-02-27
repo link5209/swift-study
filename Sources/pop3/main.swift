@@ -34,7 +34,7 @@ for node in linkedList {
 
 print(linkedList.map {$0 + "!"})
 print(linkedList.filter {$0 < "C"})
-print(linkedList.sorted(by: >))
+print(linkedList.sorted())
 
 
 

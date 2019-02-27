@@ -264,6 +264,24 @@ print("r2:", [c1,c2,c3].binarySearch(forKey: c3))
 
 
 
+// extension Collection where Element : Ordered, Index == Int
+// 利用了 associatedtype 的能力
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

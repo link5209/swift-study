@@ -75,7 +75,8 @@ for i in nl {
 
 
 
-// 使用自定义 protocol代替Comparable
+// 使用自定义 protocol type代替Comparable type
+// what types is?
 
 protocol Ordered {
     func precedes(_ other: Ordered) -> Bool

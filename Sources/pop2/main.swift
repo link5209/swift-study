@@ -1,3 +1,4 @@
+
 // Sequence
 
 struct Countdown: Sequence, IteratorProtocol {
@@ -76,9 +77,12 @@ for node in (linkedList.filter {($0.value as! Int) < 3}) {
 }
 
 
+var numbers = [1, 2, 3, 4, 5]
+numbers.append(44)
 
-
-
+protocol abc {
+    var a: Int {get}
+}
 
 
 // protocol associated type, Self 的超集，
